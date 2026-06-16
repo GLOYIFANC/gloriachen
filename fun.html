@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyond Academia — Gloria Chen</title>
+  <meta name="description" content="To live is the rarest thing in the world. Most people exist, that is all. I strive for the former, in research and beyond." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Zhi+Mang+Xing&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-fun">
+
+  <!-- INTRO ANIMATION -->
+  <div class="intro" id="intro">
+    <svg class="intro__scene" viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- boat + sail -->
+      <g class="intro__boat">
+        <!-- mast -->
+        <rect x="206" y="70" width="4" height="120" rx="2" fill="#eaceaa"/>
+        <!-- big cloud-white sail -->
+        <path d="M210 74 C 262 92, 278 140, 268 182 L210 182 Z" fill="#fbf3e6" stroke="#d39858" stroke-width="2"/>
+        <!-- small jib -->
+        <path d="M204 90 C 168 110, 160 150, 166 182 L204 182 Z" fill="#f3e7d4" stroke="#d39858" stroke-width="1.5"/>
+        <!-- hull -->
+        <path d="M150 182 L286 182 L264 214 C 258 222, 248 226, 236 226 L200 226 C 188 226, 178 222, 172 214 Z" fill="#85431e" stroke="#34150f" stroke-width="2"/>
+      </g>
+      <!-- waves -->
+      <g class="intro__sea" stroke="#d39858" stroke-width="3" stroke-linecap="round" opacity="0.85" fill="none">
+        <path d="M40 232 q 24 -16 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0"/>
+        <path d="M40 246 q 24 -16 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0" opacity="0.6"/>
+      </g>
+    </svg>
+
+    <p class="intro__quote">“What seems hopeless, when attempted boldly, often succeeds.”</p>
+    <p class="intro__zh zh">长风破浪会有时，直挂云帆济沧海</p>
+    <button class="intro__skip" id="introSkip" type="button">Skip ↦</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a class="nav__brand" href="index.html">Gloria <span>Chen</span></a>
+      <button class="nav__toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <ul class="nav__links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="fun.html">Beyond Academia</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow">Off the Clock</p>
+      <h1>Beyond Academia</h1>
+      <p class="fun-intro">
+        Economics leads my list of passions, but it does not define my limits. Beyond the rigour of research, I live with equal intensity.
+        — tap any card to flip it over.
+      </p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:1.5rem;">
+    <div class="container">
+      <div class="fun-flip-grid reveal">
+
+        <!-- 1. FOOD -->
+        <div class="funflip">
+          <div class="funflip__inner">
+            <div class="funflip__face funflip__front" style="background-image:url('assets/fun_food.jpg');">
+              <div class="funflip__overlay">
+                <span class="funflip__tag">Food Enthusiast</span>
+                <h3>Eating Around Melbourne</h3>
+                <p>Always chasing the next great table.</p>
+                <span class="funflip__hint">↻ Flip for my favourites</span>
+              </div>
+            </div>
+            <div class="funflip__face funflip__back">
+              <h3>Melbourne Favourites</h3>
+              <p class="sub">Where I send everyone</p>
+              <ul>
+                <li><b>Bistro</b> — Circl Wine House</li>
+                <li><b>French</b> — Reine &amp; La Rue</li>
+                <li><b>Chinese</b> — Hualu 花炉</li>
+                <li><b>Steak</b> — Steer Dining Room</li>
+                <li><b>Japanese</b> — Minamishima</li>
+                <li><b>Australian</b> — Ten Minutes by Tractor</li>
+              </ul>
+              <p class="flip-back-hint">↻ Flip back</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PILOTING -->
+        <div class="funflip">
+          <div class="funflip__inner">
+            <div class="funflip__face funflip__front" style="background-image:url('assets/fun_pilot.jpg');">
+              <div class="funflip__overlay">
+                <span class="funflip__tag">Piloting</span>
+                <h3>Up in the Air</h3>
+                <p>A trial flight, just for the thrill of it.</p>
+                <span class="funflip__hint">↻ Flip to see where</span>
+              </div>
+            </div>
+            <div class="funflip__face funflip__back">
+              <h3>Where I Flew</h3>
+              <p class="sub">Just for fun</p>
+              <p class="note">
+                I took a trial flight with <b>Learn to Fly</b> — not for a licence, just for the
+                joy of taking the controls and seeing the world from up there for an afternoon.
+              </p>
+              <p class="flip-back-hint">↻ Flip back</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. RETIRED BARRISTER / COFFEE -->
+        <div class="funflip">
+          <div class="funflip__inner">
+            <div class="funflip__face funflip__front" style="background-image:url('assets/fun_coffee.jpg');">
+              <div class="funflip__overlay">
+                <span class="funflip__tag">12-Year Retired Barista</span>
+                <h3>Serious About Coffee</h3>
+                <p>Twelve years behind the machine.</p>
+                <span class="funflip__hint">↻ Flip for recommendations</span>
+              </div>
+            </div>
+            <div class="funflip__face funflip__back">
+              <h3>Coffee Recommendations</h3>
+              <p class="sub">Hard-earned opinions</p>
+              <ul>
+                <li><b>Code Black</b></li>
+                <li><b>ONA</b></li>
+                <li><b>Four Kilo Fish</b> — if you're after Yunnan coffee</li>
+              </ul>
+              <p class="flip-back-hint">↻ Flip back</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. RUNNER -->
+        <div class="funflip">
+          <div class="funflip__inner">
+            <div class="funflip__face funflip__front" style="background-image:url('assets/fun_run.jpg');">
+              <div class="funflip__overlay">
+                <span class="funflip__tag">Runner</span>
+                <h3>On the Run</h3>
+                <p>Current PB: 5:17/km · half marathon.</p>
+                <span class="funflip__hint">↻ Flip for the best tracks</span>
+              </div>
+            </div>
+            <div class="funflip__face funflip__back">
+              <h3>Best Melbourne Tracks</h3>
+              <p class="sub">21 km with a return trip — or less</p>
+              <ul>
+                <li><b>The Tan</b></li>
+                <li><b>Port Melbourne Coastal Lane</b></li>
+              </ul>
+              <p class="note">Both let you make a full half marathon out and back — but they're just as good for a shorter loop.</p>
+              <p class="note">-- All the background photos are shot on the track!</p>
+              <p class="flip-back-hint">↻ Flip back</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. BARTENDER -->
+        <div class="funflip">
+          <div class="funflip__inner">
+            <div class="funflip__face funflip__front" style="background-image:url('assets/fun_bar.jpg');">
+              <div class="funflip__overlay">
+                <span class="funflip__tag">Bartender</span>
+                <h3>The Perfect Negroni</h3>
+                <p>Equal parts, no compromises.</p>
+                <span class="funflip__hint">↻ Flip for my recipe</span>
+              </div>
+            </div>
+            <div class="funflip__face funflip__back">
+              <h3>My Negroni Recipe</h3>
+              <p class="sub">Stir, don't shake</p>
+              <ul>
+                <li><b>30 ml Gin</b> — secret: house gin from Berlin Bar, Chinatown</li>
+                <li><b>30 ml Campari</b></li>
+                <li><b>30 ml Sweet Vermouth</b></li>
+              </ul>
+              <p class="note">Over a big block of ice, orange twist.</p>
+              <p class="flip-back-hint">↻ Flip back</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. BAKER -->
+        <div class="funflip">
+          <div class="funflip__inner">
+            <div class="funflip__face funflip__front" style="background-image:url('assets/fun_bake.jpg');">
+              <div class="funflip__overlay">
+                <span class="funflip__tag">Baker</span>
+                <h3>From the Oven</h3>
+                <p>Butter, flour, and a lot of patience.</p>
+                <span class="funflip__hint">↻ Flip for tips</span>
+              </div>
+            </div>
+            <div class="funflip__face funflip__back">
+              <h3>Baking Tips</h3>
+              <p class="sub">What I've learned the hard way</p>
+              <ul>
+                <li>Butter cake is far easier than chiffon.</li>
+                <li>Macarons are brutal for beginners — be patient.</li>
+                <li>Fresh yeast gives you <b>so</b> much better bread.</li>
+              </ul>
+              <p class="flip-back-hint">↻ Flip back</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__name">Gloria Chen · 陈怡帆</span>
+        <ul class="footer__links">
+          <li><a href="index.html">About</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="cv.html">CV</a></li>
+          <li><a href="fun.html">Beyond Academia</a></li>
+        </ul>
+      </div>
+      <p class="footer__copy">© <span id="year">2026</span> Gloria Chen · University of Melbourne · <a href="mailto:gloriayifanc@student.unimelb.edu.au">gloriayifanc@student.unimelb.edu.au</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
