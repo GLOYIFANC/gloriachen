@@ -18,3 +18,4 @@ Personal Website/
     ├── profile.jpg            # Profile photo (resized)
     └── Gloria_Chen_CV.pdf     # Downloadable CV
 ```
+
