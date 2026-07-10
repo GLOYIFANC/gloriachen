@@ -593,3 +593,155 @@ img { max-width: 100%; display: block; }
   .nav__links a { display: block; padding: 0.85rem 1.5rem; border-top: 1px solid rgba(255,224,190,0.12); }
   .nav__links a::after { display: none; }
 }
+
+/* =========================================================
+   Research: illustrated mechanism card
+   (When Words Move Rankings — flip-card back face)
+   ========================================================= */
+
+/* Grid-stacked faces: card height follows content on every viewport */
+.flip--mechanism .flip__inner { display: grid; min-height: 240px; }
+.flip--mechanism .flip__face { position: relative; inset: auto; grid-area: 1 / 1; }
+.flip--mechanism .flip__face--back { padding: 1.6rem 1.8rem 1.5rem; }
+
+.mmk {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  margin: 0.5rem 0 1.1rem;
+}
+.mmk p { margin: 0; }
+.mmk__step {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 0.4rem 1rem 0.6rem;
+  border-left: 1px solid rgba(255, 224, 190, 0.16);
+}
+.mmk__step:first-child { border-left: 0; }
+.mmk__title {
+  font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--champagne); opacity: 0.75;
+  margin: 0.35rem 0 1rem !important;
+}
+.mmk__list { display: flex; flex-direction: column; gap: 0.45rem; width: 100%; max-width: 9.5rem; }
+.mmk-chip {
+  display: flex; align-items: center; gap: 0.6rem;
+  border: 1px solid rgba(234, 206, 170, 0.35); border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.82rem; color: var(--champagne);
+  background: rgba(234, 206, 170, 0.05);
+}
+.mmk-chip .rank {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.78rem; color: rgba(234, 206, 170, 0.55);
+  width: 0.65rem; flex-shrink: 0;
+}
+.mmk-chip--hot {
+  border-color: var(--whiskey); background: rgba(211, 152, 88, 0.18); color: #fff;
+  box-shadow: 0 0 0 1px rgba(211, 152, 88, 0.25), 0 6px 18px -8px rgba(211, 152, 88, 0.55);
+}
+.mmk-chip--hot .rank { color: var(--whiskey); }
+
+/* The reported list re-sorts itself once the card is revealed */
+.flip--mechanism.flipped .mmk__list--after .mmk-chip--hot {
+  animation: mmkRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+.flip--mechanism.flipped .mmk__list--after .mmk-chip:not(.mmk-chip--hot) {
+  animation: mmkSettle 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+@keyframes mmkRise { from { transform: translateY(4.6rem); opacity: 0.3; } to { transform: translateY(0); opacity: 1; } }
+@keyframes mmkSettle { from { transform: translateY(-2.3rem); } to { transform: translateY(0); } }
+
+.mmk__match {
+  display: flex; align-items: center; gap: 0.45rem;
+  margin-top: 1rem !important;
+  font-size: 0.78rem; color: var(--champagne);
+}
+.mmk__match .dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  border: 1px solid rgba(234, 206, 170, 0.8);
+}
+.mmk__match .dot--hot { background: var(--whiskey); border-color: var(--whiskey); }
+.mmk__tag {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.82rem; color: rgba(234, 206, 170, 0.6);
+  margin-top: 0.25rem !important;
+}
+.mmk__tag--hot { color: var(--whiskey); }
+
+.mmk__flow {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  width: 100%; margin: 1.7rem 0 1.2rem;
+}
+.mmk__flow .who { font-size: 0.78rem; color: var(--champagne); white-space: nowrap; }
+.mmk__wire { flex: 0 1 2.6rem; min-width: 1.1rem; border-top: 1px dashed rgba(234, 206, 170, 0.5); position: relative; }
+.mmk__wire--arrow::after {
+  content: ""; position: absolute; right: -1px; top: -3.5px;
+  border-left: 5px solid rgba(234, 206, 170, 0.75);
+  border-top: 3px solid transparent; border-bottom: 3px solid transparent;
+}
+.mmk__env { color: var(--whiskey); flex-shrink: 0; }
+
+.mmk__coretext {
+  margin: 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 224, 190, 0.16);
+  font-size: 0.86rem; line-height: 1.6; color: #e9d7bf;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+.mmk__coretext em { font-style: normal; font-weight: 600; color: var(--whiskey); }
+
+@media (max-width: 640px) {
+  .mmk, .mmk--quad { grid-template-columns: 1fr; }
+  .mmk__step, .mmk--quad .mmk__step { border-left: 0 !important; border-top: 1px solid rgba(255, 224, 190, 0.16); padding: 1rem 0.2rem 0.9rem; }
+  .mmk__step:first-child { border-top: 0; padding-top: 0.4rem; }
+  .mmk__flow, .mmk--quad .mmk__flow { margin: 1rem 0 0.8rem; }
+}
+
+/* Centered front face — shared by all research flip cards */
+.flip__face--front-centered { align-items: center; text-align: center; }
+.flip__face--front-centered .flip__btn { align-self: center; }
+.mmk__motif { color: var(--whiskey); opacity: 0.45; margin-bottom: 1.3rem; }
+
+/* Front-face takeaway quote */
+.flip__quote {
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.22rem); line-height: 1.55;
+  color: var(--coffee);
+  max-width: 36ch;
+  margin: 0.7rem 0 0.5rem !important;
+}
+.flip__quote-sub {
+  font-size: 0.92rem; color: var(--text-soft);
+  max-width: 44ch; margin: 0 !important;
+}
+
+/* Four-phase quadrant layout */
+.mmk--quad { grid-template-columns: 1fr 1fr; }
+.mmk--quad .mmk__step { border-left: 0; padding: 1rem 1.1rem 1.2rem; }
+.mmk--quad .mmk__step:nth-child(even) { border-left: 1px solid rgba(255, 224, 190, 0.16); }
+.mmk--quad .mmk__step:nth-child(n+3) { border-top: 1px solid rgba(255, 224, 190, 0.16); }
+.mmk--quad .mmk__title { margin-top: 0 !important; }
+.mmk--quad .mmk__flow { margin: 1.4rem 0 1rem; }
+
+/* Designer objectives: held in theory, struck in practice */
+.mmk__objs { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.8rem; }
+.mmk__obj {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+  font-size: 0.78rem; color: rgba(234, 206, 170, 0.8);
+}
+.mmk__obj .mark { color: var(--whiskey); font-size: 0.72rem; }
+.mmk__obj--fail { color: rgba(234, 206, 170, 0.5); }
+.mmk__obj--fail s { text-decoration-color: rgba(211, 152, 88, 0.75); }
+
+/* =========================================================
+   Home: hero research statement
+   ========================================================= */
+
+.hero__statement {
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem); line-height: 1.6;
+  color: var(--champagne);
+  max-width: 48ch;
+  margin: 0 0 1.2rem;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
