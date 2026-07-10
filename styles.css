@@ -31,9 +31,9 @@
   --dark-glass: rgba(34, 18, 12, 0.46);
   --dark-glass-border: rgba(255, 224, 190, 0.22);
 
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-zh: "Zhi Mang Xing", "Xingkai TC", "STXingkai", "STSong", "Songti SC", "SimSun", serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", var(--font-zh);
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", var(--font-zh);
+  --font-zh: "Zhi Mang Xing", "Long Cang", "Xingkai TC", "STXingkai", "STSong", "Songti SC", "SimSun", serif;
 
   --maxw: 1080px;
   --radius: 18px;
@@ -291,7 +291,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Section headings on glass pages ---------- */
 .section > .container > .eyebrow { color: var(--champagne); }
 .section > .container > h2 { color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,0.45); }
-.section > .container > p.lead { color: #f1e4d2; text-shadow: 0 1px 12px rgba(0,0,0,0.4); max-width: 700px; }
+.section > .container > p.lead { color: #f1e4d2; text-shadow: 0 1px 12px rgba(0,0,0,0.4); }
 
 /* ---------- References ---------- */
 .ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
@@ -333,11 +333,18 @@ img { max-width: 100%; display: block; }
 
 /* Flip card (research) */
 .flip { perspective: 1600px; margin-top: 1.4rem; }
-.flip__inner { position: relative; width: 100%; min-height: 240px; transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d; cursor: pointer; }
+.flip__inner { display: grid; width: 100%; min-height: 240px; transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d; cursor: pointer; }
 .flip.flipped .flip__inner { transform: rotateY(180deg); }
-.flip__face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; padding: 1.5rem 1.6rem; display: flex; flex-direction: column; justify-content: center; }
+.flip__face { position: relative; grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; padding: 1.5rem 1.6rem; display: flex; flex-direction: column; justify-content: center; }
 .flip__face--front { background: rgba(211, 152, 88, 0.16); border: 1px solid rgba(255,255,255,0.4); }
-.flip__face--back { background: rgba(34, 18, 12, 0.82); color: var(--champagne); transform: rotateY(180deg); border: 1px solid rgba(255,224,190,0.25); }
+.flip__face--back {
+  background: rgba(34, 18, 12, 0.82); color: var(--champagne); transform: rotateY(180deg); border: 1px solid rgba(255,224,190,0.25);
+  /* Collapsed while the front shows; expands with the flip so the back is never clipped */
+  max-height: 290px;
+  overflow: hidden;
+  transition: max-height 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip.flipped .flip__face--back { max-height: 2600px; }
 .flip__face--back h4 { color: var(--whiskey); }
 .flip__face--back ul { margin: 0; padding-left: 1.1rem; }
 .flip__face--back li { margin-bottom: 0.6rem; line-height: 1.5; }
@@ -381,7 +388,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Student feedback ---------- */
 .feedback-note { margin: 0.2rem 0 1.6rem; font-style: italic; color: rgba(234, 206, 170, 0.85); }
-.feedback-acc { max-width: 820px; display: flex; flex-direction: column; gap: 1rem; }
+.feedback-acc { display: flex; flex-direction: column; gap: 1rem; }
 .feedback-group {
   background: var(--glass-bg);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -438,68 +445,97 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Page header ---------- */
 .page-head { padding: 3rem 0 1rem; }
-.page-head p { max-width: 720px; }
+.page-head p { max-width: none; }
 
-/* ---------- Fun: intro animation ---------- */
+/* ---------- Fun: ink-wash mountains on rice paper ---------- */
 .intro {
   position: fixed;
   inset: 0;
   z-index: 200;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.4rem;
   text-align: center;
   padding: 2rem;
-  background: radial-gradient(circle at 50% 35%, #3a1d10 0%, #1c0f0a 70%, #120a07 100%);
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  overflow: hidden;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E") repeat,
+    radial-gradient(ellipse at 50% 18%, #fbf5e6 0%, #f3e9d2 58%, #e6d6b7 100%);
+  background-size: 180px 180px, cover;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
 }
 .intro.intro--done { opacity: 0; visibility: hidden; pointer-events: none; }
-.intro__scene { width: min(420px, 80vw); }
-.intro__sea { animation: seaBob 2.4s ease-in-out infinite; transform-origin: center; }
-@keyframes seaBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
-.intro__boat { animation: sail 3s ease-in-out forwards; transform-origin: center; }
-@keyframes sail {
-  0%   { transform: translateX(-180px) rotate(-6deg); opacity: 0; }
-  25%  { opacity: 1; }
-  50%  { transform: translateX(0) rotate(4deg); }
-  75%  { transform: translateX(0) rotate(-3deg); }
-  100% { transform: translateX(40px) rotate(2deg); opacity: 1; }
-}
-.intro__quote {
-  color: var(--cream);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(1.15rem, 3.4vw, 1.7rem);
-  max-width: 620px;
+.intro.intro--done .intro__content { transform: translateY(-14px); }
+
+/* Ink-wash mountains, mist, birds, one far sail */
+.intro__shan {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: min(46vh, 420px);
   opacity: 0;
-  animation: introFade 0.9s ease forwards;
-  animation-delay: 0.5s;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  animation: shanRise 1.7s ease 0.05s forwards;
+  pointer-events: none;
 }
-.intro__zh {
+@keyframes shanRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+.shan { fill: #43332a; }
+.shan--far  { opacity: 0.14; }
+.shan--mid  { opacity: 0.22; }
+.shan--near { opacity: 0.34; }
+.shan-birds { stroke: #43332a; stroke-width: 2.4; opacity: 0.38; }
+.shan-sail  { fill: #43332a; opacity: 0; animation: sailFade 1.6s ease 2.2s forwards; }
+@keyframes sailFade { to { opacity: 0.3; } }
+
+.intro__content { position: relative; max-width: 92vw; transition: transform 0.9s ease; }
+
+/* English quote — calligraphy that writes itself on */
+.intro__script { margin: 0 0 1.5rem; }
+.intro__script-line {
+  display: block;
+  font-family: "Italianno", "Playfair Display", cursive;
+  font-size: clamp(2.2rem, 6.6vw, 3.6rem);
+  line-height: 1.18;
+  color: #2e211a;
+  clip-path: inset(-22% 100% -22% -2%);
+  animation: writeOn var(--w) cubic-bezier(0.4, 0.05, 0.45, 1) var(--d) forwards;
+}
+@keyframes writeOn { to { clip-path: inset(-22% -5% -22% -2%); } }
+
+/* The verse — each character lands like a drop of ink */
+.intro__verse {
+  margin: 0;
   font-family: var(--font-zh);
-  color: var(--champagne);
-  font-size: clamp(1.3rem, 4.5vw, 2.1rem);
-  letter-spacing: 0.08em;
-  opacity: 0;
-  animation: introFade 0.9s ease forwards;
-  animation-delay: 1.3s;
+  color: #241a12;
+  font-size: clamp(1.75rem, 5.6vw, 2.6rem);
+  letter-spacing: 0.13em;
+  line-height: 1.55;
 }
-.intro__attrib { color: var(--whiskey); font-family: var(--font-zh); font-size: 1.1rem; opacity: 0; animation: introFade 0.9s ease forwards; animation-delay: 1.7s; }
-@keyframes introFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.intro__phrase { display: inline-block; white-space: nowrap; }
+.intro__char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(5px);
+  transform: scale(1.35) rotate(2deg);
+  animation: inkDrop 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) calc(1.95s + var(--i) * 0.15s) forwards;
+}
+/* When the couplet wraps, the trailing comma hangs cleanly */
+.intro__char--punc { letter-spacing: 0; }
+@keyframes inkDrop {
+  55% { filter: blur(1px); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+
 .intro__skip {
   position: absolute; bottom: 1.6rem; right: 1.8rem;
-  background: rgba(255,255,255,0.12); color: var(--cream);
-  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255, 252, 244, 0.55); color: #4a382a;
+  border: 1px solid rgba(74, 56, 42, 0.35);
   border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.85rem; cursor: pointer;
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
-.intro__skip:hover { background: rgba(255,255,255,0.22); }
+.intro__skip:hover { background: rgba(255, 252, 244, 0.85); }
 
 /* ---------- Fun: flip cards with photo fronts ---------- */
-.fun-intro { max-width: 700px; }
+.fun-intro { max-width: none; }
 .fun-flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.6rem; margin-top: 2.2rem; }
 .funflip { perspective: 1600px; height: 400px; }
 .funflip__inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d; cursor: pointer; }
@@ -543,6 +579,20 @@ img { max-width: 100%; display: block; }
 .funflip__back .note { color: #e7d4bd; font-size: 0.95rem; line-height: 1.65; }
 .funflip__back .flip-back-hint { margin-top: auto; padding-top: 0.8rem; font-size: 0.78rem; color: var(--whiskey); }
 
+/* Small screens: let the card grow so the back is never clipped */
+@media (max-width: 640px) {
+  .funflip { height: auto; min-height: 400px; }
+  .funflip__inner { display: grid; height: auto; }
+  .funflip__face { position: relative; inset: auto; grid-area: 1 / 1; }
+  .funflip__front { min-height: 400px; }
+  .funflip__back {
+    max-height: 400px; overflow: hidden;
+    transition: max-height 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  .funflip.flipped .funflip__back { max-height: 1600px; }
+  .funflip__back ul { overflow-y: visible; }
+}
+
 /* ---------- Footer ---------- */
 .footer {
   background: rgba(20, 11, 7, 0.55);
@@ -555,7 +605,7 @@ img { max-width: 100%; display: block; }
 .footer a { color: var(--whiskey); }
 .footer a:hover { color: #fff; }
 .footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem; align-items: center; }
-.footer__name { font-family: var(--font-display); font-size: 1.3rem; color: #fff; }
+.footer__name { font-family: var(--font-display), var(--font-zh); font-size: 1.3rem; color: #fff; }
 .footer__links { display: flex; gap: 1.3rem; list-style: none; margin: 0; padding: 0; font-size: 0.92rem; }
 .footer__copy { width: 100%; border-top: 1px solid rgba(234,206,170,0.2); padding-top: 1.2rem; margin-top: 1.2rem; font-size: 0.82rem; color: rgba(234,206,170,0.65); }
 .footer__note { width: 100%; margin: 0.4rem 0 0; font-family: "Italianno", cursive; font-size: 1.45rem; letter-spacing: 0.02em; color: rgba(234,206,170,0.7); }
@@ -600,16 +650,7 @@ img { max-width: 100%; display: block; }
    ========================================================= */
 
 /* Grid-stacked faces: card height follows content on every viewport */
-.flip--mechanism .flip__inner { display: grid; min-height: 240px; }
-.flip--mechanism .flip__face { position: relative; inset: auto; grid-area: 1 / 1; }
-.flip--mechanism .flip__face--back {
-  padding: 1.6rem 1.8rem 1.5rem;
-  /* Collapsed while the takeaway front shows — the card stays as thin as its siblings */
-  max-height: 290px;
-  overflow: hidden;
-  transition: max-height 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
-}
-.flip--mechanism.flipped .flip__face--back { max-height: 2200px; }
+.flip--mechanism .flip__face--back { padding: 1.6rem 1.8rem 1.5rem; }
 
 /* Compact front: match the height of the other flip cards */
 .flip--mechanism .mmk__motif { width: 52px; height: auto; margin-bottom: 0.8rem; }
@@ -698,7 +739,6 @@ img { max-width: 100%; display: block; }
   padding-top: 0.9rem;
   border-top: 1px solid rgba(255, 224, 190, 0.16);
   font-size: 0.86rem; line-height: 1.6; color: #e9d7bf;
-  max-width: 62ch;
   text-wrap: pretty;
 }
 .mmk__coretext em { font-style: normal; font-weight: 600; color: var(--whiskey); }
@@ -720,12 +760,12 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display); font-style: italic;
   font-size: clamp(1.05rem, 2vw, 1.22rem); line-height: 1.55;
   color: var(--coffee);
-  max-width: 36ch;
+  max-width: 60ch;
   margin: 0.7rem 0 0.5rem !important;
 }
 .flip__quote-sub {
   font-size: 0.92rem; color: var(--text-soft);
-  max-width: 44ch; margin: 0 !important;
+  max-width: 70ch; margin: 0 !important;
 }
 
 /* Four-phase quadrant layout */
@@ -739,7 +779,6 @@ img { max-width: 100%; display: block; }
 /* Example setup line + ranking-list labels */
 .mmk__setup {
   font-size: 0.86rem; line-height: 1.55; color: #e9d7bf;
-  max-width: 60ch;
   margin: 0.2rem 0 0.3rem !important;
 }
 .mmk__listlabel {
@@ -766,7 +805,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display); font-style: italic;
   font-size: clamp(1.05rem, 2.2vw, 1.25rem); line-height: 1.6;
   color: var(--champagne);
-  max-width: 48ch;
+  max-width: 60ch;
   margin: 0 0 1.2rem;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }

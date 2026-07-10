@@ -12,34 +12,34 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Zhi+Mang+Xing&family=Italianno&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Italianno&family=Long+Cang&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-fun">
 
-  <!-- INTRO ANIMATION -->
+  <!-- INTRO — ink-wash mountains on rice paper -->
   <div class="intro" id="intro">
-    <svg class="intro__scene" viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- boat + sail -->
-      <g class="intro__boat">
-        <!-- mast -->
-        <rect x="206" y="70" width="4" height="120" rx="2" fill="#eaceaa"/>
-        <!-- big cloud-white sail -->
-        <path d="M210 74 C 262 92, 278 140, 268 182 L210 182 Z" fill="#fbf3e6" stroke="#d39858" stroke-width="2"/>
-        <!-- small jib -->
-        <path d="M204 90 C 168 110, 160 150, 166 182 L204 182 Z" fill="#f3e7d4" stroke="#d39858" stroke-width="1.5"/>
-        <!-- hull -->
-        <path d="M150 182 L286 182 L264 214 C 258 222, 248 226, 236 226 L200 226 C 188 226, 178 222, 172 214 Z" fill="#85431e" stroke="#34150f" stroke-width="2"/>
+    <svg class="intro__shan" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path class="shan shan--far" d="M0 292 C130 208, 250 186, 372 232 C472 269, 555 251, 655 202 C755 154, 856 168, 948 214 C1040 258, 1122 264, 1200 242 L1200 420 L0 420 Z"/>
+      <path class="shan shan--mid" d="M0 330 C110 268, 210 246, 330 280 C450 314, 540 296, 640 252 C740 208, 850 222, 950 268 C1050 312, 1130 318, 1200 300 L1200 420 L0 420 Z"/>
+      <path class="shan shan--near" d="M0 376 C140 330, 260 318, 400 344 C540 370, 660 356, 780 322 C900 288, 1040 300, 1200 348 L1200 420 L0 420 Z"/>
+      <g class="shan-birds" fill="none" stroke-linecap="round">
+        <path d="M168 172 q9 -9 18 0 q9 -9 18 0"/>
+        <path d="M226 154 q7 -7 14 0 q7 -7 14 0"/>
       </g>
-      <!-- waves -->
-      <g class="intro__sea" stroke="#d39858" stroke-width="3" stroke-linecap="round" opacity="0.85" fill="none">
-        <path d="M40 232 q 24 -16 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0"/>
-        <path d="M40 246 q 24 -16 48 0 t 48 0 t 48 0 t 48 0 t 48 0 t 48 0" opacity="0.6"/>
+      <g class="shan-sail">
+        <path d="M295 240 c10 -27 12 -42 11 -60 c15 19 21 42 18 60 Z"/>
+        <path d="M287 244 l46 0 l-8 10 l-31 0 Z"/>
       </g>
     </svg>
 
-    <p class="intro__quote">“What seems hopeless, when attempted boldly, often succeeds.”</p>
-    <p class="intro__zh zh">长风破浪会有时，直挂云帆济沧海</p>
+    <div class="intro__content">
+      <p class="intro__script">
+        <span class="intro__script-line" style="--w: 1.0s; --d: 0.30s">What seems hopeless,</span>
+        <span class="intro__script-line" style="--w: 1.2s; --d: 1.30s">when attempted boldly, often succeeds.</span>
+      </p>
+      <p class="intro__verse" lang="zh"><span class="intro__phrase"><span class="intro__char" style="--i:0">长</span><span class="intro__char" style="--i:1">风</span><span class="intro__char" style="--i:2">破</span><span class="intro__char" style="--i:3">浪</span><span class="intro__char" style="--i:4">会</span><span class="intro__char" style="--i:5">有</span><span class="intro__char" style="--i:6">时</span><span class="intro__char intro__char--punc" style="--i:7">，</span></span><span class="intro__phrase"><span class="intro__char" style="--i:8">直</span><span class="intro__char" style="--i:9">挂</span><span class="intro__char" style="--i:10">云</span><span class="intro__char" style="--i:11">帆</span><span class="intro__char" style="--i:12">济</span><span class="intro__char" style="--i:13">沧</span><span class="intro__char" style="--i:14">海</span></span></p>
+    </div>
     <button class="intro__skip" id="introSkip" type="button">Skip ↦</button>
   </div>
 

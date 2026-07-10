@@ -79,6 +79,7 @@
     }
     var skip = document.getElementById("introSkip");
     if (skip) { skip.addEventListener("click", dismiss); }
-    setTimeout(dismiss, 3000);
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(dismiss, reduceMotion ? 700 : 5400);
   }
 })();
