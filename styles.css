@@ -602,7 +602,20 @@ img { max-width: 100%; display: block; }
 /* Grid-stacked faces: card height follows content on every viewport */
 .flip--mechanism .flip__inner { display: grid; min-height: 240px; }
 .flip--mechanism .flip__face { position: relative; inset: auto; grid-area: 1 / 1; }
-.flip--mechanism .flip__face--back { padding: 1.6rem 1.8rem 1.5rem; }
+.flip--mechanism .flip__face--back {
+  padding: 1.6rem 1.8rem 1.5rem;
+  /* Collapsed while the takeaway front shows — the card stays as thin as its siblings */
+  max-height: 290px;
+  overflow: hidden;
+  transition: max-height 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip--mechanism.flipped .flip__face--back { max-height: 2200px; }
+
+/* Compact front: match the height of the other flip cards */
+.flip--mechanism .mmk__motif { width: 52px; height: auto; margin-bottom: 0.8rem; }
+.flip--mechanism .flip__quote { font-size: clamp(1rem, 1.8vw, 1.15rem); margin-top: 0.45rem !important; }
+.flip--mechanism .flip__hint { margin-top: 0.8rem; }
+.flip--mechanism .flip__btn { margin-top: 0.9rem; }
 
 .mmk {
   display: grid;
@@ -722,6 +735,18 @@ img { max-width: 100%; display: block; }
 .mmk--quad .mmk__step:nth-child(n+3) { border-top: 1px solid rgba(255, 224, 190, 0.16); }
 .mmk--quad .mmk__title { margin-top: 0 !important; }
 .mmk--quad .mmk__flow { margin: 1.4rem 0 1rem; }
+
+/* Example setup line + ranking-list labels */
+.mmk__setup {
+  font-size: 0.86rem; line-height: 1.55; color: #e9d7bf;
+  max-width: 60ch;
+  margin: 0.2rem 0 0.3rem !important;
+}
+.mmk__listlabel {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.8rem; color: rgba(234, 206, 170, 0.65);
+  margin: -0.4rem 0 0.7rem !important;
+}
 
 /* Designer objectives: held in theory, struck in practice */
 .mmk__objs { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.8rem; }
