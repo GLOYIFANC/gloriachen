@@ -337,14 +337,16 @@ img { max-width: 100%; display: block; }
 .flip.flipped .flip__inner { transform: rotateY(180deg); }
 .flip__face { position: relative; grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; padding: 1.5rem 1.6rem; display: flex; flex-direction: column; justify-content: center; }
 .flip__face--front { background: rgba(211, 152, 88, 0.16); border: 1px solid rgba(255,255,255,0.4); }
-.flip__face--back {
-  background: rgba(34, 18, 12, 0.82); color: var(--champagne); transform: rotateY(180deg); border: 1px solid rgba(255,224,190,0.25);
-  /* Collapsed while the front shows; expands with the flip so the back is never clipped */
-  max-height: 290px;
+.flip__face--back { background: rgba(34, 18, 12, 0.82); color: var(--champagne); transform: rotateY(180deg); border: 1px solid rgba(255,224,190,0.25); }
+/* Height clamp lives on an inner wrapper, not the 3D face — Safari renders
+   backface-visibility unreliably when the rotated face itself clips overflow */
+.flip__back-inner {
+  display: flex; flex-direction: column; justify-content: center;
+  max-height: 250px;
   overflow: hidden;
   transition: max-height 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
-.flip.flipped .flip__face--back { max-height: 2600px; }
+.flip.flipped .flip__back-inner { max-height: 4000px; }
 .flip__face--back h4 { color: var(--whiskey); }
 .flip__face--back ul { margin: 0; padding-left: 1.1rem; }
 .flip__face--back li { margin-bottom: 0.6rem; line-height: 1.5; }
@@ -447,7 +449,8 @@ img { max-width: 100%; display: block; }
 .page-head { padding: 3rem 0 1rem; }
 .page-head p { max-width: none; }
 
-/* ---------- Fun: ink-wash mountains on rice paper ---------- */
+/* ---------- Fun: dusk-harbour entry ---------- */
+/* Drop a photo at assets/intro_harbour.jpg and it takes over the painted sky automatically */
 .intro {
   position: fixed;
   inset: 0;
@@ -459,15 +462,25 @@ img { max-width: 100%; display: block; }
   padding: 2rem;
   overflow: hidden;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E") repeat,
-    radial-gradient(ellipse at 50% 18%, #fbf5e6 0%, #f3e9d2 58%, #e6d6b7 100%);
-  background-size: 180px 180px, cover;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E") repeat,
+    url("assets/intro_harbour.jpg") center / cover no-repeat,
+    radial-gradient(ellipse 70% 32% at 24% 58%, rgba(255, 205, 118, 0.85) 0%, rgba(255, 190, 105, 0.35) 45%, transparent 72%),
+    linear-gradient(180deg,
+      #2a5da8 0%,
+      #3f7ac2 26%,
+      #6f9fd4 44%,
+      #d9c08d 56%,
+      #b08050 60%,
+      #23456b 63%,
+      #1b3757 76%,
+      #12263f 100%);
+  background-size: 180px 180px, cover, cover, cover;
   transition: opacity 0.9s ease, visibility 0.9s ease;
 }
 .intro.intro--done { opacity: 0; visibility: hidden; pointer-events: none; }
 .intro.intro--done .intro__content { transform: translateY(-14px); }
 
-/* Ink-wash mountains, mist, birds, one far sail */
+/* Harbour water, headland, birds, one lit sail */
 .intro__shan {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -478,15 +491,22 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 @keyframes shanRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-.shan { fill: #43332a; }
-.shan--far  { opacity: 0.14; }
-.shan--mid  { opacity: 0.22; }
-.shan--near { opacity: 0.34; }
-.shan-birds { stroke: #43332a; stroke-width: 2.4; opacity: 0.38; }
-.shan-sail  { fill: #43332a; opacity: 0; animation: sailFade 1.6s ease 2.2s forwards; }
-@keyframes sailFade { to { opacity: 0.3; } }
+.shan { fill: #0d1f36; }
+.shan--far  { opacity: 0.45; }
+.shan--mid  { opacity: 0.65; }
+.shan--near { opacity: 0.85; }
+.shan-birds { stroke: rgba(250, 238, 214, 0.75); stroke-width: 2.4; }
+.shan-sail  { fill: #f6ead2; opacity: 0; animation: sailFade 1.6s ease 2.2s forwards; }
+@keyframes sailFade { to { opacity: 0.92; } }
 
-.intro__content { position: relative; max-width: 92vw; transition: transform 0.9s ease; }
+.intro__content {
+  position: relative;
+  max-width: 92vw;
+  padding: 2.5rem 3rem;
+  border-radius: 50%;
+  background: radial-gradient(ellipse closest-side, rgba(10, 24, 44, 0.38), rgba(10, 24, 44, 0.18) 60%, transparent 100%);
+  transition: transform 0.9s ease;
+}
 
 /* English quote — calligraphy that writes itself on */
 .intro__script { margin: 0 0 1.5rem; }
@@ -495,7 +515,8 @@ img { max-width: 100%; display: block; }
   font-family: "Italianno", "Playfair Display", cursive;
   font-size: clamp(2.2rem, 6.6vw, 3.6rem);
   line-height: 1.18;
-  color: #2e211a;
+  color: #fdf4e0;
+  text-shadow: 0 2px 26px rgba(8, 20, 40, 0.65);
   clip-path: inset(-22% 100% -22% -2%);
   animation: writeOn var(--w) cubic-bezier(0.4, 0.05, 0.45, 1) var(--d) forwards;
 }
@@ -504,11 +525,12 @@ img { max-width: 100%; display: block; }
 /* The verse — each character lands like a drop of ink */
 .intro__verse {
   margin: 0;
-  font-family: var(--font-zh);
-  color: #241a12;
+  font-family: "Long Cang", var(--font-zh);
+  color: #fff6e2;
   font-size: clamp(1.75rem, 5.6vw, 2.6rem);
   letter-spacing: 0.13em;
   line-height: 1.55;
+  text-shadow: 0 1px 4px rgba(8, 20, 40, 0.55), 0 3px 22px rgba(8, 20, 40, 0.65);
 }
 .intro__phrase { display: inline-block; white-space: nowrap; }
 .intro__char {
@@ -527,12 +549,14 @@ img { max-width: 100%; display: block; }
 
 .intro__skip {
   position: absolute; bottom: 1.6rem; right: 1.8rem;
-  background: rgba(255, 252, 244, 0.55); color: #4a382a;
-  border: 1px solid rgba(74, 56, 42, 0.35);
+  background: rgba(12, 26, 44, 0.45); color: #f3e7d4;
+  border: 1px solid rgba(246, 234, 210, 0.4);
   border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.85rem; cursor: pointer;
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  transition: var(--transition);
 }
-.intro__skip:hover { background: rgba(255, 252, 244, 0.85); }
+.intro__skip:hover { background: rgba(12, 26, 44, 0.7); }
+.intro__skip:active { transform: translateY(1px) scale(0.98); }
 
 /* ---------- Fun: flip cards with photo fronts ---------- */
 .fun-intro { max-width: none; }
@@ -579,17 +603,20 @@ img { max-width: 100%; display: block; }
 .funflip__back .note { color: #e7d4bd; font-size: 0.95rem; line-height: 1.65; }
 .funflip__back .flip-back-hint { margin-top: auto; padding-top: 0.8rem; font-size: 0.78rem; color: var(--whiskey); }
 
+/* Inner wrapper carries the height clamp (Safari-safe, see .flip__back-inner) */
+.funflip__back-inner { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
 /* Small screens: let the card grow so the back is never clipped */
 @media (max-width: 640px) {
   .funflip { height: auto; min-height: 400px; }
   .funflip__inner { display: grid; height: auto; }
   .funflip__face { position: relative; inset: auto; grid-area: 1 / 1; }
   .funflip__front { min-height: 400px; }
-  .funflip__back {
-    max-height: 400px; overflow: hidden;
+  .funflip__back-inner {
+    max-height: 360px; overflow: hidden;
     transition: max-height 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
   }
-  .funflip.flipped .funflip__back { max-height: 1600px; }
+  .funflip.flipped .funflip__back-inner { max-height: 2000px; }
   .funflip__back ul { overflow-y: visible; }
 }
 
@@ -743,13 +770,6 @@ img { max-width: 100%; display: block; }
 }
 .mmk__coretext em { font-style: normal; font-weight: 600; color: var(--whiskey); }
 
-@media (max-width: 640px) {
-  .mmk, .mmk--quad { grid-template-columns: 1fr; }
-  .mmk__step, .mmk--quad .mmk__step { border-left: 0 !important; border-top: 1px solid rgba(255, 224, 190, 0.16); padding: 1rem 0.2rem 0.9rem; }
-  .mmk__step:first-child { border-top: 0; padding-top: 0.4rem; }
-  .mmk__flow, .mmk--quad .mmk__flow { margin: 1rem 0 0.8rem; }
-}
-
 /* Centered front face — shared by all research flip cards */
 .flip__face--front-centered { align-items: center; text-align: center; }
 .flip__face--front-centered .flip__btn { align-self: center; }
@@ -775,6 +795,15 @@ img { max-width: 100%; display: block; }
 .mmk--quad .mmk__step:nth-child(n+3) { border-top: 1px solid rgba(255, 224, 190, 0.16); }
 .mmk--quad .mmk__title { margin-top: 0 !important; }
 .mmk--quad .mmk__flow { margin: 1.4rem 0 1rem; }
+
+/* Small screens: every phase stacks in a single column
+   (must stay AFTER the .mmk--quad base rules to win the cascade) */
+@media (max-width: 640px) {
+  .mmk, .mmk--quad { grid-template-columns: 1fr; }
+  .mmk__step, .mmk--quad .mmk__step { border-left: 0 !important; border-top: 1px solid rgba(255, 224, 190, 0.16); padding: 1rem 0.2rem 0.9rem; }
+  .mmk__step:first-child { border-top: 0; padding-top: 0.4rem; }
+  .mmk__flow, .mmk--quad .mmk__flow { margin: 1rem 0 0.8rem; }
+}
 
 /* Example setup line + ranking-list labels */
 .mmk__setup {
@@ -809,3 +838,25 @@ img { max-width: 100%; display: block; }
   margin: 0 0 1.2rem;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
+
+/* =========================================================
+   Final polish: a11y skip link, pressed states, tabular years
+   ========================================================= */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 300;
+  background: var(--coffee);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0 0 10px 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.skip-link:focus { left: 0; }
+
+.flip__btn:active { transform: translateY(1px) scale(0.98); }
+.name-meaning__trigger:active { transform: translateY(1px); }
+.cv-entry .year, .footer__copy { font-variant-numeric: tabular-nums; }
