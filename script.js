@@ -64,6 +64,24 @@
     reveals.forEach(function (el) { el.classList.add("in"); });
   }
 
+  // Floating nav: hide on scroll down, return on scroll up
+  var nav = document.querySelector(".nav");
+  if (nav) {
+    var lastY = window.scrollY;
+    window.addEventListener("scroll", function () {
+      var yPos = window.scrollY;
+      var menuOpen = links && links.classList.contains("open");
+      if (!menuOpen) {
+        if (yPos > lastY + 4 && yPos > 140) {
+          nav.classList.add("nav--hidden");
+        } else if (yPos < lastY - 4 || yPos <= 140) {
+          nav.classList.remove("nav--hidden");
+        }
+      }
+      lastY = yPos;
+    }, { passive: true });
+  }
+
   // Footer year
   var y = document.getElementById("year");
   if (y) { y.textContent = new Date().getFullYear(); }
