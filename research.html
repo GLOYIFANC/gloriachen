@@ -43,7 +43,7 @@
       <h1>Research</h1>
       <p>
         My research combines microeconomic theory with laboratory experiments to study
-        matching markets, information design, and educational choice. Click any
+        matching markets, information design, and educational choice. Click or tap any
         <strong>“Key findings”</strong> card to flip it and see the main results.
       </p>
     </div>
@@ -61,18 +61,14 @@
         </div>
         <div class="paper__body">
           <p class="paper__abstract">
-            Deferred Acceptance (DA) mechanisms are widely implemented in centralised matching markets,
-            where the proposing side is deliberately chosen to ensure strategy-proofness for proposers and
-            the proposer-optimal stable matching. In practice, however, pre-match communication from the
-            receiving side indicating strong interest &mdash; such as &ldquo;ranked-to-match&rdquo; messages
-            in the NRMP &mdash; is prevalent. In a laboratory experiment with candidate&ndash;firm matching
-            and candidate-proposing DA, we find that firms strategically target messages toward their
-            firm-optimal stable matching partners, while candidates respond by ranking messaging firms
-            higher. Together, these behaviours shift market outcomes away from the candidate-optimal and
-            toward the firm-optimal stable matching, with statistically significant effects when messages
-            are committed, meaning that firms must rank the message recipient first. Our findings identify
-            pre-match communication as a novel form of manipulation outside the matching mechanism and show
-            that it can undermine the objectives that market designers seek to achieve.
+            The proposing side in Deferred Acceptance is deliberately chosen to ensure strategy-proofness
+            for proposers and the proposer-optimal stable matching. In a lab experiment, we show that
+            pre-match communication can undermine this design choice. Receivers strategically target their
+            partners under the receiver-optimal stable matching with messages expressing strong interest,
+            inducing proposers to deviate from truth-telling by ranking the sender higher. This shifts
+            outcomes back in receivers&rsquo; favour, significantly so when messages carry a commitment to
+            rank the recipient first. Our findings identify strategic messaging as a novel form of receiver
+            manipulation and suggest that the communication environment should be part of market design.
           </p>
 
           <div class="flip flip--mechanism">
@@ -94,7 +90,7 @@
                 <p class="mmk__setup">Stylised example: A candidate's preference is A&nbsp;≻&nbsp;B&nbsp;≻&nbsp;C, Assume Firm&nbsp;A is candidate-optimal match, and Firm&nbsp;C is firm-optimal.</p>
                 <div class="mmk mmk--quad">
                   <div class="mmk__step">
-                    <p class="mmk__title">Classical theory</p>
+                    <p class="mmk__title">Standard utility</p>
                     <p class="mmk__listlabel">Preference = ROL</p>
                     <div class="mmk__list">
                       <span class="mmk-chip"><span class="rank">1</span>Firm A</span>
@@ -143,9 +139,10 @@
                   </div>
                 </div>
                 <p class="mmk__coretext">
-                  Pre-match messaging acts as a <em>low-risk behavioural manipulation</em>: candidates deviate
-                  from truth-telling to favour the messaging firm, shifting the equilibrium to a firm-optimal
-                  stable matching — both of the designer&rsquo;s objectives fail.
+                  Desirable incentive properties of matching mechanisms do not insulate participants
+                  from <em>strategic influences outside the mechanism</em>: even when truthful reporting is a
+                  weakly dominant strategy, pre-match communication can alter submitted rankings
+                  and the resulting allocation.
                 </p>
                 <span class="flip__hint">↻ Click to flip back</span>
                 </div>
@@ -159,23 +156,23 @@
       <article class="paper reveal">
         <div class="paper__head">
           <span class="paper__status">Work in Progress · Theory + Experiment</span>
-          <h2 class="paper__title">Between Merit and the Coin Flip: Designing Selection in School Choice Problems</h2>
+          <h2 class="paper__title">Sorting Talent, Distorting Skills: How Precision Shapes Meritocratic Selection?</h2>
           <p class="paper__meta">Solo-authored</p>
         </div>
         <div class="paper__body">
           <p class="paper__abstract">
-            Selection mechanisms that rank candidates on exams, honours, or research output sort only on what
-            they observe, yet job competence often has dimensions these signals miss. I study this trade-off
-            in a matching tournament: high- and low-ability candidates split a fixed effort budget between
-            observable signalling and unobserved soft-skill investment, and are hired assortatively by
-            high- and low-quality firms on a noisy signal of that effort. A precise exam sorts more accurately
-            but invites over-investment in signalling; a lottery removes that over-investment but sorts
-            randomly, and a coarse exam approaches the lottery as noise increases. I show a precise exam
-            raises welfare when the ability gap between candidates is large relative to the quality
-            difference between firms; when the reverse holds, increasing exam noise raises welfare, and a
-            lottery achieves the highest welfare in the limit. I test these predictions in a laboratory
-            experiment that varies exam noise and the ability gap, and ask whether observed effort and
-            welfare track the theoretical reversal or deviate from it, and if so, why.
+            Selection mechanisms, such as exams, aim to sort more productive applicants into higher-return
+            positions, but they also shape how applicants allocate effort across skills. By assessing only a
+            subset of productive skills, exams improve sorting while distorting skill composition. I study
+            how exam noise affects this trade-off and aggregate match value. Exams can outperform a lottery
+            at low and high noise levels yet underperform at intermediate levels. Starting from a precise
+            exam, adding noise weakens sorting before it becomes sufficiently large to discourage skill
+            distortions. Losses from distorted skill composition can therefore outweigh the remaining
+            sorting gains. Further increases in noise ultimately make allocation less responsive to
+            tested-skill effort, moving skill composition closer to its optimum and allowing sorting gains
+            to dominate again. Improving exam performance may therefore require either greater precision to
+            strengthen sorting or greater noise to bring effort allocation closer to the optimal skill
+            composition.
           </p>
 
           <p class="paper__status" style="display:inline-block; margin-top:0.5rem;">In design stage</p>

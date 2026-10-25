@@ -31,9 +31,25 @@
   }
 
   // Research flip cards (.flip) and Fun flip cards (.funflip)
-  function wireFlip(selector) {
+  var phone = window.matchMedia ? window.matchMedia("(max-width: 640px)") : null;
+
+  function wireFlip(selector, keepInView) {
     document.querySelectorAll(selector).forEach(function (flip) {
-      function doFlip() { flip.classList.toggle("flipped"); }
+      function doFlip() {
+        flip.classList.toggle("flipped");
+        // On phones the faces swap in place rather than rotating, so the
+        // card's height changes under the reader — pull its top back to just
+        // below the floating nav. Measured next frame, once the swap has
+        // been laid out.
+        if (keepInView && phone && phone.matches) {
+          requestAnimationFrame(function () {
+            var top = flip.getBoundingClientRect().top;
+            if (top < 110 || top > window.innerHeight - 140) {
+              window.scrollTo({ top: top + window.scrollY - 110, behavior: "smooth" });
+            }
+          });
+        }
+      }
       flip.querySelectorAll(".flip__btn").forEach(function (btn) {
         btn.addEventListener("click", function (e) { e.stopPropagation(); doFlip(); });
       });
@@ -45,8 +61,8 @@
       });
     });
   }
-  wireFlip(".flip");
-  wireFlip(".funflip");
+  wireFlip(".flip", true);
+  wireFlip(".funflip", false);
 
   // Scroll reveal
   var reveals = document.querySelectorAll(".reveal");

@@ -962,3 +962,52 @@ body { line-height: 1.72; }
   transform: translateY(-4px);
   box-shadow: 0 22px 50px -14px rgba(20, 12, 12, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
+
+/* =========================================================
+   Research flip cards on phones
+   ---------------------------------------------------------
+   The 3D flip stacks both faces in a single grid cell, so the
+   card is always as tall as its tallest face. On a phone the
+   mechanism diagram stacks into one long column, which padded
+   the un-flipped front out into a ~800px near-empty box and
+   pushed the flipped card past 1400px.
+
+   Below 640px the card stops rotating and simply swaps faces:
+   one face is in the flow at a time, each sized to its own
+   content, so nothing is stretched to match its sibling. The
+   diagram itself already reflows to one column (see the
+   .mmk--quad small-screen rules above) and stays interactive.
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .flip { perspective: none; }
+  .flip__inner {
+    display: block;
+    min-height: 0;
+    transform: none !important;
+    transform-style: flat;
+    transition: none;
+  }
+  .flip__face {
+    position: static;
+    grid-area: auto;
+    transform: none !important;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+    padding: 1.3rem 1.15rem;
+  }
+
+  /* One face at a time, so neither inherits the other's height */
+  .flip__face--back { display: none; }
+  .flip.flipped .flip__face--front { display: none; }
+  .flip.flipped .flip__face--back { display: flex; animation: flipFaceIn 0.4s var(--ease-out) both; }
+
+  /* The clamp only existed to keep the back hidden behind the
+     front; with the faces separated there is nothing to hide. */
+  .flip__back-inner { max-height: none; overflow: visible; transition: none; }
+
+  .flip--mechanism .flip__face--back { padding: 1.3rem 1.15rem; }
+  .flip__btn { align-self: center; }
+}
+
+@keyframes flipFaceIn { from { opacity: 0; } to { opacity: 1; } }
